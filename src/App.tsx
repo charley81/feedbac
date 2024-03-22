@@ -1,8 +1,14 @@
+import Footer from './components/footer'
+import Container from './components/container'
+import HashtagList from './components/hashtag-list'
+
 function App() {
   return (
-    <>
-      <h1>feedbac</h1>
-    </>
+    <div className="app">
+      <Footer />
+      <Container />
+      <HashtagList />
+    </div>
   )
 }
 
