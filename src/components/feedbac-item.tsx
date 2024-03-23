@@ -1,6 +1,7 @@
 import { TriangleUpIcon } from '@radix-ui/react-icons'
 
 type FeedbacItem = {
+  id: number
   upVoteCount: number
   badgeLetter: string
   companyName: string
