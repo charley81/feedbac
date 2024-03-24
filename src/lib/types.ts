@@ -1,10 +1,10 @@
 export type TFeedbacItem = {
   id: number
-  upVoteCount: number
+  upvoteCount: number
   badgeLetter: string
-  companyName: string
+  company: string
   text: string
-  daysAgo: string
+  daysAgo: number
 }
 
 export type ContainerProps = {

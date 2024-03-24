@@ -1,6 +1,6 @@
 import Header from './header'
-import FeedbacList from './feedbac-list'
-import { ContainerProps } from '../lib/types'
+import FeedbacList from '../feedbac/feedbac-list'
+import { ContainerProps } from '../../lib/types'
 
 export default function Container({
   feedbacItems,

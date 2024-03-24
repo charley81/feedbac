@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Footer from './components/footer'
-import Container from './components/container'
-import HashtagList from './components/hashtag-list'
-import { TFeedbacItem } from './lib/types'
+import Footer from './layout/footer'
+import Container from './layout/container'
+import HashtagList from './hashtag-list'
+import { TFeedbacItem } from '../lib/types'
 
 function App() {
   const [feedbacItems, setFeedbacItems] = useState<TFeedbacItem[]>([])
@@ -25,9 +25,7 @@ function App() {
     }
   }
 
-  const handleAddToList = (text: string) => {
-    if (!text) return
-
+  const handleAddToList = async (text: string) => {
     const companyName = text
       .split(' ')
       .find((char: string) => char.includes('#'))!
@@ -35,19 +33,32 @@ function App() {
 
     const newItem: TFeedbacItem = {
       id: new Date().getTime(),
-      upVoteCount: 0,
-      badgeLetter: companyName[0],
-      companyName: companyName,
-      daysAgo: '0d',
-      text
+      text: text,
+      upvoteCount: 0,
+      daysAgo: 0,
+      company: companyName,
+      badgeLetter: companyName.substring(0, 1).toUpperCase()
     }
 
-    setFeedbacItems([newItem, ...feedbacItems])
+    setFeedbacItems([...feedbacItems, newItem])
+
+    await fetch(
+      'https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks',
+      {
+        method: 'POST',
+        body: JSON.stringify(newItem),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    )
   }
 
   useEffect(() => {
     fetchFeedbacItems()
   }, [])
+
   return (
     <div className="app">
       <Footer />

@@ -1,7 +1,7 @@
 import FeedbacItem from './feedbac-item'
-import { FeedbacListProps } from '../lib/types'
-import Spinner from './spinner'
-import ErrorMessage from './error-message'
+import { FeedbacListProps } from '../../lib/types'
+import Spinner from '../spinner'
+import ErrorMessage from '../error-message'
 
 export default function FeedbackList({
   feedbacItems,
