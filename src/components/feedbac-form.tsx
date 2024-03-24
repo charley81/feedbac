@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { MAX_CHARACTERS } from '../lib/constants'
+import { FeedbacFormProps } from '../lib/types'
 
-export default function FeedbacForm() {
+export default function FeedbacForm({ onAddToList }: FeedbacFormProps) {
   const [text, setText] = useState('')
   const charactersLeft = MAX_CHARACTERS - text.length
 
@@ -13,8 +14,14 @@ export default function FeedbacForm() {
     setText(newText)
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    onAddToList(text)
+    setText('')
+  }
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <textarea
         name="user-feedbac"
         id="feedbac-textarea"
@@ -27,9 +34,7 @@ export default function FeedbacForm() {
       <label htmlFor="feedbac-textarea">Enter your feedbac here...</label>
       <div>
         <p className="u-italic">{charactersLeft}</p>
-        <button>
-          <span>Submit</span>
-        </button>
+        <button type="submit">submit</button>
       </div>
     </form>
   )

@@ -1,16 +1,8 @@
 import { TriangleUpIcon } from '@radix-ui/react-icons'
-
-type FeedbacItem = {
-  id: number
-  upVoteCount: number
-  badgeLetter: string
-  companyName: string
-  text: string
-  daysAgo: string
-}
+import { TFeedbacItem } from '../lib/types'
 
 type FeedbacItemProps = {
-  feedbacItem: FeedbacItem
+  feedbacItem: TFeedbacItem
 }
 
 export default function FeedbacItem({ feedbacItem }: FeedbacItemProps) {
