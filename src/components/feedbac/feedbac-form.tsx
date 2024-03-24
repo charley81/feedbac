@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { MAX_CHARACTERS } from '../lib/constants'
-import { FeedbacFormProps } from '../lib/types'
+import { MAX_CHARACTERS } from '../../lib/constants'
+import { FeedbacFormProps } from '../../lib/types'
 
 export default function FeedbacForm({ onAddToList }: FeedbacFormProps) {
   const [text, setText] = useState('')

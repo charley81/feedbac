@@ -1,5 +1,5 @@
 import { TriangleUpIcon } from '@radix-ui/react-icons'
-import { TFeedbacItem } from '../lib/types'
+import { TFeedbacItem } from '../../lib/types'
 
 type FeedbacItemProps = {
   feedbacItem: TFeedbacItem
@@ -10,7 +10,7 @@ export default function FeedbacItem({ feedbacItem }: FeedbacItemProps) {
     <li className="feedback">
       <button>
         <TriangleUpIcon />
-        <span>{feedbacItem.upVoteCount}</span>
+        <span>{feedbacItem.upvoteCount}</span>
       </button>
 
       <div>
@@ -18,11 +18,11 @@ export default function FeedbacItem({ feedbacItem }: FeedbacItemProps) {
       </div>
 
       <div>
-        <p>{feedbacItem.companyName}</p>
+        <p>{feedbacItem.company}</p>
         <p>{feedbacItem.text}</p>
       </div>
 
-      <p>4d</p>
+      <p>{feedbacItem.daysAgo === 0 ? 'New' : `${feedbacItem.daysAgo}d`}</p>
     </li>
   )
 }
