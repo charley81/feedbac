@@ -8,15 +8,22 @@ type FeedbacItemProps = {
 
 export default function FeedbacItem({ feedbacItem }: FeedbacItemProps) {
   const [open, setOpen] = useState(false)
+  const [upvoteCount, setUpvoteCount] = useState(feedbacItem.upvoteCount)
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.disabled = true
+    e.stopPropagation()
+    setUpvoteCount((prev) => ++prev)
+  }
 
   return (
     <li
       className={`feedback ${open && 'feedback--expand'}`}
       onClick={() => setOpen(!open)}
     >
-      <button>
+      <button onClick={handleClick}>
         <TriangleUpIcon />
-        <span>{feedbacItem.upvoteCount}</span>
+        <span>{upvoteCount}</span>
       </button>
 
       <div>
