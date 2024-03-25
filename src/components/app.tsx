@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Footer from './layout/footer'
 import Container from './layout/container'
 import HashtagList from './hashtag/hashtag-list'
@@ -10,15 +10,23 @@ function App() {
   const [errMessage, setErrMessage] = useState('')
   const [selectedCompany, setSelectedCompany] = useState<string>('')
 
-  const filteredFeedbacItems = selectedCompany
-    ? feedbacItems.filter(
-        (feedbackItem) => feedbackItem.company === selectedCompany
-      )
-    : feedbacItems
+  const filteredFeedbacItems = useMemo(
+    () =>
+      selectedCompany
+        ? feedbacItems.filter(
+            (feedbackItem) => feedbackItem.company === selectedCompany
+          )
+        : feedbacItems,
+    [selectedCompany, feedbacItems]
+  )
 
-  const companyList = feedbacItems
-    .map((item) => item.company)
-    .filter((company, index, array) => array.indexOf(company) === index)
+  const companyList = useMemo(
+    () =>
+      feedbacItems
+        .map((item) => item.company)
+        .filter((company, index, array) => array.indexOf(company) === index),
+    [feedbacItems]
+  )
 
   const fetchFeedbacItems = async () => {
     setLoading(true)

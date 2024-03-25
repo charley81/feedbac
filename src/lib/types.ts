@@ -26,6 +26,7 @@ export type FeedbacFormProps = {
 
 export type HashTagListProps = {
   companyList: string[]
+  handleSetCompany: (company: string) => void
 }
 
 export type HashtagItemProps = {
