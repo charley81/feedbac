@@ -1,13 +1,24 @@
 import { useState, useEffect } from 'react'
 import Footer from './layout/footer'
 import Container from './layout/container'
-import HashtagList from './hashtag-list'
+import HashtagList from './hashtag/hashtag-list'
 import { TFeedbacItem } from '../lib/types'
 
 function App() {
   const [feedbacItems, setFeedbacItems] = useState<TFeedbacItem[]>([])
   const [loading, setLoading] = useState(true)
   const [errMessage, setErrMessage] = useState('')
+  const [selectedCompany, setSelectedCompany] = useState<string>('')
+
+  const filteredFeedbacItems = selectedCompany
+    ? feedbacItems.filter(
+        (feedbackItem) => feedbackItem.company === selectedCompany
+      )
+    : feedbacItems
+
+  const companyList = feedbacItems
+    .map((item) => item.company)
+    .filter((company, index, array) => array.indexOf(company) === index)
 
   const fetchFeedbacItems = async () => {
     setLoading(true)
@@ -55,6 +66,10 @@ function App() {
     )
   }
 
+  const handleSetCompany = (company: string) => {
+    setSelectedCompany(company)
+  }
+
   useEffect(() => {
     fetchFeedbacItems()
   }, [])
@@ -63,12 +78,15 @@ function App() {
     <div className="app">
       <Footer />
       <Container
-        feedbacItems={feedbacItems}
+        feedbacItems={filteredFeedbacItems}
         loading={loading}
         errMessage={errMessage}
         handleAddToList={handleAddToList}
       />
-      <HashtagList />
+      <HashtagList
+        companyList={companyList}
+        handleSetCompany={handleSetCompany}
+      />
     </div>
   )
 }
