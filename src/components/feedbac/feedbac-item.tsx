@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { TriangleUpIcon } from '@radix-ui/react-icons'
 import { TFeedbacItem } from '../../lib/types'
 
@@ -6,8 +7,13 @@ type FeedbacItemProps = {
 }
 
 export default function FeedbacItem({ feedbacItem }: FeedbacItemProps) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <li className="feedback">
+    <li
+      className={`feedback ${open && 'feedback--expand'}`}
+      onClick={() => setOpen(!open)}
+    >
       <button>
         <TriangleUpIcon />
         <span>{feedbacItem.upvoteCount}</span>
